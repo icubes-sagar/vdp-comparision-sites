@@ -1,0 +1,244 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base resets tied to brand CSS variables ──────────────────────────────── */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background-color: var(--color-primary);
+    color: #fff;
+  }
+}
+
+/* ── Utility layer ───────────────────────────────────────────────────────── */
+@layer utilities {
+  .text-brand-primary   { color: var(--color-primary); }
+  .text-brand-secondary { color: var(--color-secondary); }
+  .text-brand-accent    { color: var(--color-accent); }
+  .text-brand-muted     { color: var(--color-muted); }
+
+  .bg-brand-primary   { background-color: var(--color-primary); }
+  .bg-brand-secondary { background-color: var(--color-secondary); }
+  .bg-brand-accent    { background-color: var(--color-accent); }
+  .bg-brand-bg        { background-color: var(--color-bg); }
+  .bg-brand-surface   { background-color: var(--color-surface); }
+
+  .border-brand       { border-color: var(--color-border); }
+  .border-brand-primary { border-color: var(--color-primary); }
+
+  .rounded-brand { border-radius: var(--radius); }
+
+  .font-heading { font-family: var(--font-heading); }
+  .font-body    { font-family: var(--font-body); }
+
+  /* Stagger animation delays for list reveals */
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+  .delay-600 { animation-delay: 600ms; }
+
+  /* Opacity 0 base for animated elements */
+  .animate-on-load {
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+}
+
+/* ── Component layer ─────────────────────────────────────────────────────── */
+@layer components {
+  /* Primary CTA button */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-body font-semibold text-white transition-all duration-200;
+    background-color: var(--color-accent);
+    border-radius: var(--radius);
+  }
+  .btn-primary:hover {
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  }
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+
+  /* Secondary ghost button */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-body font-semibold transition-all duration-200;
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    border-radius: var(--radius);
+  }
+  .btn-secondary:hover {
+    background-color: var(--color-primary);
+    color: #fff;
+  }
+
+  /* Card surface */
+  .card {
+    @apply p-6 shadow-sm transition-shadow duration-200;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+  }
+  .card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  /* Section container */
+  .section {
+    @apply w-full py-16 md:py-20;
+  }
+
+  .container-brand {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Section heading */
+  .section-title {
+    @apply font-heading text-3xl font-bold md:text-4xl;
+    color: var(--color-text);
+  }
+
+  /* Divider */
+  .brand-divider {
+    @apply my-2 h-1 w-16 rounded-full;
+    background-color: var(--color-accent);
+  }
+
+  /* Badge pill */
+  .badge {
+    @apply inline-flex items-center px-3 py-1 text-xs font-semibold uppercase tracking-wider;
+    background-color: var(--color-primary);
+    color: #fff;
+    border-radius: 9999px;
+  }
+
+  .badge-accent {
+    @apply inline-flex items-center px-3 py-1 text-xs font-semibold uppercase tracking-wider;
+    background-color: var(--color-accent);
+    color: #fff;
+    border-radius: 9999px;
+  }
+
+  /* Check icon list item */
+  .check-item {
+    @apply flex items-start gap-3 text-sm;
+  }
+
+  /* Discount banner */
+  .discount-banner {
+    @apply flex flex-wrap items-center justify-between gap-3 rounded-brand border px-5 py-4;
+    border-color: var(--color-accent);
+    background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+  }
+
+  /* Sticky nav */
+  .site-nav {
+    @apply sticky top-0 z-50 border-b;
+    background-color: var(--color-surface);
+    border-color: var(--color-border);
+    backdrop-filter: blur(8px);
+  }
+}
+
+/* ── Animations ──────────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.75; }
+}
+
+/* ── Scrollbar ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-border);
+  border-radius: 9999px;
+}
+
+/* ── Focus visible ───────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ── Prose overrides for article content ─────────────────────────────────── */
+.article-prose {
+  @apply text-base leading-relaxed;
+  color: var(--color-text);
+}
+.article-prose p { @apply mb-4; }
+.article-prose strong { @apply font-semibold; color: var(--color-primary); }
+
+/* ── Table base ──────────────────────────────────────────────────────────── */
+.comparison-table th {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+.comparison-table td {
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.comparison-table tr:hover td {
+  background-color: color-mix(in srgb, var(--color-primary) 4%, transparent);
+}
+
+.comparison-table td.highlight {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+/* ── FAQ accordion ───────────────────────────────────────────────────────── */
+details > summary {
+  list-style: none;
+  cursor: pointer;
+}
+details > summary::-webkit-details-marker { display: none; }
+details[open] summary .faq-chevron { transform: rotate(180deg); }
+.faq-chevron { transition: transform 0.25s ease; }
